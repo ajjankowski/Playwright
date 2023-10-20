@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
+import { Datepicker } from '../pages/datepicker-page.js';
 
 test('test', async ({ page }) => {
-  await page.goto('https://webdriveruniversity.com/Datepicker/index.html');
-  await expect(page).toHaveTitle('WebDriver | Datepicker');
-  await page.getByRole('textbox').click();
-  await page.getByRole('cell', { name: '18' }).click();
-  expect(await page.locator('.form-control').inputValue()).toBe('10-18-2023');
+  const datepicker = new Datepicker(page);
+  await datepicker.goto();
+  await datepicker.pickDate();
+  expect(await datepicker.pickedDate.inputValue()).toBe('10-18-2023');
   await page.close();
 });
