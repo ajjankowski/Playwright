@@ -1,62 +1,67 @@
 import { test, expect } from '@playwright/test';
+import { DropdownCheckboxRadio } from '../pages/dropdown-checkbox-radio-page.js';
 
 test('dropdown menu', async ({ page }) => {
-  await page.goto('https://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html');
-  await expect(page).toHaveTitle('WebDriver | Dropdown Menu(s) | Checkboxe(s) | Radio Button(s)');
-  await page.locator('#dropdowm-menu-1').selectOption('c#');
-  expect(await page.locator('#dropdowm-menu-1 option:checked').innerText()).toBe('C#');
-  await page.locator('#dropdowm-menu-1').selectOption('java');
-  expect(await page.locator('#dropdowm-menu-1 option:checked').innerText()).toBe('JAVA');
-  await page.locator('#dropdowm-menu-1').selectOption('python');
-  expect(await page.locator('#dropdowm-menu-1 option:checked').innerText()).toBe('Python');
-  await page.locator('#dropdowm-menu-1').selectOption('sql');
-  expect(await page.locator('#dropdowm-menu-1 option:checked').innerText()).toBe('SQL');
-  await page.locator('#dropdowm-menu-2').selectOption('maven');
-  expect(await page.locator('#dropdowm-menu-2 option:checked').innerText()).toBe('Maven');
-  await page.locator('#dropdowm-menu-2').selectOption('eclipse');
-  expect(await page.locator('#dropdowm-menu-2 option:checked').innerText()).toBe('Eclipse');
-  await page.locator('#dropdowm-menu-2').selectOption('testng');
-  expect(await page.locator('#dropdowm-menu-2 option:checked').innerText()).toBe('TestNG');
-  await page.locator('#dropdowm-menu-2').selectOption('junit');
-  expect(await page.locator('#dropdowm-menu-2 option:checked').innerText()).toBe('JUnit');
-  await page.locator('#dropdowm-menu-3').selectOption('css');
-  expect(await page.locator('#dropdowm-menu-3 option:checked').innerText()).toBe('CSS');
-  await page.locator('#dropdowm-menu-3').selectOption('html');
-  expect(await page.locator('#dropdowm-menu-3 option:checked').innerText()).toBe('HTML');
-  await page.locator('#dropdowm-menu-3').selectOption('javascript');
-  expect(await page.locator('#dropdowm-menu-3 option:checked').innerText()).toBe('JavaScript');
-  await page.locator('#dropdowm-menu-3').selectOption('jquery');
-  expect(await page.locator('#dropdowm-menu-3 option:checked').innerText()).toBe('JQuery');
+  const dropdownCheckboxRadio = new DropdownCheckboxRadio(page);
+  await dropdownCheckboxRadio.goto();
+
+  await dropdownCheckboxRadio.selectFromDropdown1('C#');
+  expect(await dropdownCheckboxRadio.dropdown1Checked.innerText()).toBe('C#');
+  await dropdownCheckboxRadio.selectFromDropdown1('JAVA');
+  expect(await dropdownCheckboxRadio.dropdown1Checked.innerText()).toBe('JAVA');
+  await dropdownCheckboxRadio.selectFromDropdown1('Python');
+  expect(await dropdownCheckboxRadio.dropdown1Checked.innerText()).toBe('Python');
+  await dropdownCheckboxRadio.selectFromDropdown1('SQL');
+  expect(await dropdownCheckboxRadio.dropdown1Checked.innerText()).toBe('SQL');
+
+  await dropdownCheckboxRadio.selectFromDropdown2('Maven');
+  expect(await dropdownCheckboxRadio.dropdown2Checked.innerText()).toBe('Maven');
+  await dropdownCheckboxRadio.selectFromDropdown2('Eclipse');
+  expect(await dropdownCheckboxRadio.dropdown2Checked.innerText()).toBe('Eclipse');
+  await dropdownCheckboxRadio.selectFromDropdown2('TestNG');
+  expect(await dropdownCheckboxRadio.dropdown2Checked.innerText()).toBe('TestNG');
+  await dropdownCheckboxRadio.selectFromDropdown2('JUnit');
+  expect(await dropdownCheckboxRadio.dropdown2Checked.innerText()).toBe('JUnit');
+
+  await dropdownCheckboxRadio.selectFromDropdown3('CSS');
+  expect(await dropdownCheckboxRadio.dropdown3Checked.innerText()).toBe('CSS');
+  await dropdownCheckboxRadio.selectFromDropdown3('HTML');
+  expect(await dropdownCheckboxRadio.dropdown3Checked.innerText()).toBe('HTML');
+  await dropdownCheckboxRadio.selectFromDropdown3('JavaScript');
+  expect(await dropdownCheckboxRadio.dropdown3Checked.innerText()).toBe('JavaScript');
+  await dropdownCheckboxRadio.selectFromDropdown3('JQuery');
+  expect(await dropdownCheckboxRadio.dropdown3Checked.innerText()).toBe('JQuery');
+
   await page.close();
 });
 
 test('checkboxes', async ({ page }) => {
-  await page.goto('https://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html');
-  await expect(page).toHaveTitle('WebDriver | Dropdown Menu(s) | Checkboxe(s) | Radio Button(s)');
-  await page.getByLabel('Option 1').check();
-  await page.getByLabel('Option 2').check();
-  await page.getByLabel('Option 4').check();
-  await page.getByLabel('Option 2').uncheck();
-  await page.getByLabel('Option 4').uncheck();
-  await expect(page.getByLabel('Option 1')).toBeChecked();
-  await expect(page.getByLabel('Option 2')).not.toBeChecked();
-  await expect(page.getByLabel('Option 3')).toBeChecked();
-  await expect(page.getByLabel('Option 4')).not.toBeChecked();
+  const dropdownCheckboxRadio = new DropdownCheckboxRadio(page);
+  await dropdownCheckboxRadio.goto();
+  await dropdownCheckboxRadio.checkbox1.check();
+  await dropdownCheckboxRadio.checkbox2.check();
+  await dropdownCheckboxRadio.checkbox4.check();
+  await dropdownCheckboxRadio.checkbox2.uncheck();
+  await dropdownCheckboxRadio.checkbox4.uncheck();
+  await expect(dropdownCheckboxRadio.checkbox1).toBeChecked();
+  await expect(dropdownCheckboxRadio.checkbox2).not.toBeChecked();
+  await expect(dropdownCheckboxRadio.checkbox3).toBeChecked();
+  await expect(dropdownCheckboxRadio.checkbox4).not.toBeChecked();
   await page.close();
 });
 
 test('radio buttons', async ({ page }) => {
-  await page.goto('https://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html');
-  await expect(page).toHaveTitle('WebDriver | Dropdown Menu(s) | Checkboxe(s) | Radio Button(s)');
-  await page.locator('input[name="color"]').nth(0).check();
-  await expect(page.locator('input[name="color"]').nth(0)).toBeChecked();
-  await page.locator('input[name="color"]').nth(1).check();
-  await expect(page.locator('input[name="color"]').nth(1)).toBeChecked();
-  await page.locator('input[name="color"]').nth(2).check();
-  await expect(page.locator('input[name="color"]').nth(2)).toBeChecked();
-  await page.locator('input[name="color"]').nth(3).check();
-  await expect(page.locator('input[name="color"]').nth(3)).toBeChecked();
-  await page.locator('input[name="color"]').nth(4).check();
-  await expect(page.locator('input[name="color"]').nth(4)).toBeChecked();
+  const dropdownCheckboxRadio = new DropdownCheckboxRadio(page);
+  await dropdownCheckboxRadio.goto();
+  await dropdownCheckboxRadio.radio1Green.check();
+  await expect(dropdownCheckboxRadio.radio1Green).toBeChecked();
+  await dropdownCheckboxRadio.radio2Blue.check();
+  await expect(dropdownCheckboxRadio.radio2Blue).toBeChecked();
+  await dropdownCheckboxRadio.radio3Yellow.check();
+  await expect(dropdownCheckboxRadio.radio3Yellow).toBeChecked();
+  await dropdownCheckboxRadio.radio4Orange.check();
+  await expect(dropdownCheckboxRadio.radio4Orange).toBeChecked();
+  await dropdownCheckboxRadio.radio5Purple.check();
+  await expect(dropdownCheckboxRadio.radio5Purple).toBeChecked();
   await page.close();
 });
