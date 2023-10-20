@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { AjaxLoaderPage } from '../pages/ajax-loader-page.js';
 
 test('test', async ({ page }) => {
-  await page.goto('https://webdriveruniversity.com/Ajax-Loader/index.html');
-  await expect(page).toHaveTitle('WebDriver | Ajax-Loader');
-  await page.getByText('CLICK ME!').click();
-  await expect(page.getByRole('heading', { name: 'Well Done For Waiting....!!!' })).toBeVisible();
-  await page.getByRole('button', { name: 'Close' }).click();
-  await expect(page.getByText('CLICK ME!')).toBeVisible();
+  const ajaxLoaderPage = new AjaxLoaderPage(page);
+  await ajaxLoaderPage.goto();
+  await ajaxLoaderPage.clickAfterWait();
+  await expect(ajaxLoaderPage.confirmationMessage).toBeVisible();
+  await ajaxLoaderPage.closeMessage();
+  await expect(ajaxLoaderPage.clickMeButton).toBeVisible();
   await page.close();
 });
