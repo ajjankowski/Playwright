@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
 import { ContatUsPage } from '../pages/contact-us-page.js';
 
-const firstName: string = "John";
-const lastName: string = "Doe";
-const emailCorrect: string = "john.doe@test.com";
-const emailIncorrect: string = "john.doe@";
-const comment: string = "test comment";
-const commentEmpty: string = "";
+const firstName: string = 'John';
+const lastName: string = 'Doe';
+const emailCorrect: string = 'john.doe@test.com';
+const emailIncorrect: string = 'john.doe@';
+const comment: string = 'test comment';
+const commentEmpty: string = '';
 
 test('contact us reset', async ({ page }) => {
   const contatUsPage = new ContatUsPage(page);
