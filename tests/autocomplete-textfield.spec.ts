@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { AutocompleteTextfieldPage } from '../pages/autocomplete-textfield-page.js';
 
-test('test', async ({ page }) => {
+test('autocomplete-textfield', async ({ page }) => {
   const autocompleteTextfieldPage = new AutocompleteTextfieldPage(page);
   await autocompleteTextfieldPage.goto();
   await autocompleteTextfieldPage.foodItem.fill('chi');

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { Datepicker } from '../pages/datepicker-page.js';
 
-test('test', async ({ page }) => {
+test('datepicker', async ({ page }) => {
   const datepicker = new Datepicker(page);
   await datepicker.goto();
   await datepicker.pickDate();

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { AjaxLoaderPage } from '../pages/ajax-loader-page.js';
 
-test('test', async ({ page }) => {
+test('ajax-loader', async ({ page }) => {
   const ajaxLoaderPage = new AjaxLoaderPage(page);
   await ajaxLoaderPage.goto();
   await ajaxLoaderPage.clickAfterWait();
